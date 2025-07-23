@@ -77,6 +77,11 @@
     alert("Geolocation is not supported by this browser.");
   }
 }
+navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
+  if (result.state === 'denied') {
+    alert('Please enable location access in your browser settings.');
+  }
+});
 
 
     async function getWeather() {
