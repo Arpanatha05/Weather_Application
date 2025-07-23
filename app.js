@@ -48,7 +48,8 @@
         return;
       }
 
-      const url = `http://api.weatherapi.com/v1/current.json?key=16100ec6549d48e287314917252307&q=${encodeURIComponent(city)}&aqi=yes`;
+      //const url = `http://api.weatherapi.com/v1/current.json?key=16100ec6549d48e287314917252307&q=${encodeURIComponent(city)}&aqi=yes`;
+     const url = `https://api.weatherapi.com/v1/current.json?key=...`
 
       try {
         const res = await fetch(url);
@@ -72,9 +73,11 @@
         };
 
         saveToHistory(historyData);
-      } catch (error) {
-        alert("Error fetching weather data. Please check the city name.");
-      }
+      }catch (error) {
+  console.error("Weather fetch failed:", error);
+  alert("Error fetching weather data. Please check the city name.");
+}
+
     }
 
     window.onload = renderHistory;
