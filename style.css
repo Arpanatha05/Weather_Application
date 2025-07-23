@@ -1,4 +1,4 @@
-    body {
+    /* body {
       margin: 0;
       font-family: 'Segoe UI', sans-serif;
       background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
@@ -8,8 +8,82 @@
       align-items: center;
       min-height: 100vh;
       padding: 20px;
+    } */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      
     }
 
+    body {
+      height: 100vh;
+      background: linear-gradient(to top, #87ceeb 0%, #e0f7ff 100%);
+      overflow: hidden;
+      position: relative;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Sun */
+    .sun {
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, #FFD700, #FFA500);
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+      animation: pulse 3s ease-in-out infinite;
+      z-index: -1;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+    }
+
+    /* Cloud styling */
+    .cloud {
+      position: absolute;
+      fill: white;
+      opacity: 0.85;
+      animation: floatCloud linear infinite;
+      z-index:-1;
+    }
+
+    /* Individual clouds */
+    .cloud1 { top: 10vh; left: -200px; width: 150px; animation-duration: 60s; }
+    .cloud2 { top: 20vh; left: -300px; width: 250px; animation-duration: 80s; opacity: 0.6; }
+    .cloud3 { top: 30vh; left: -400px; width: 180px; animation-duration: 100s; opacity: 0.7; }
+    .cloud4 { top: 50vh; left: -500px; width: 220px; animation-duration: 90s; opacity: 0.5; }
+    .cloud5 { top: 65vh; left: -600px; width: 270px; animation-duration: 120s; opacity: 0.4; }
+
+    @keyframes floatCloud {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(150vw); }
+    }
+
+    @media (max-width: 600px) {
+      .sun {
+        width: 70px;
+        height: 70px;
+      }
+      .cloud1, .cloud2, .cloud3, .cloud4, .cloud5 {
+        width: auto;
+        max-width: 50vw;
+      }
+    }
     h1 {
       margin-top: 20px;
       font-size: 2rem;
@@ -45,7 +119,7 @@
     }
 
     button:hover {
-      background-color: #007e99;
+      background-color: #FFD700;
       color: #fff;
     }
 
@@ -83,7 +157,7 @@
       padding: 10px 15px;
       border-radius: 10px;
       text-align: left;
-      color: #fff;
+      color: black;
       transition: background-color 0.3s, transform 0.3s;
     }
 
@@ -93,12 +167,12 @@
     }
 
     .info-card strong {
-      color: #00f7ff;
+      color: #02797d;
       font-size: 1.05rem;
     }
 
     .info-card span {
-      color: #f0f8ff;
+      color: black;
       font-weight: bold;
       font-size: 1.1rem;
     }
@@ -138,6 +212,11 @@
 
     .history-weather {
       font-size: 0.9rem;
+    }
+    #cityInput{
+      border-radius: 10px;
+      border:solid 2px #00c6ff ;
+     
     }
 
     @media (max-width: 400px) {
