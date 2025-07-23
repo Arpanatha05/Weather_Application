@@ -234,9 +234,7 @@
       button{
         margin-left: 100px;
       }
-      h3{
-        margin-left: 100px;
-      }
+      
     }
     @media(max-width:500px){
       h1{
@@ -245,9 +243,7 @@
       button{
         margin-left: 100px;
       }
-      h3{
-        margin-left: 100px;
-      }
+      
        input {
         width: 100%;
       }
@@ -261,11 +257,9 @@
         margin-top: 120px;
       }
       button{
-        margin-left: 100px;
+       margin-left: 50px;
       }
-      h3{
-        margin-left: 100px;
-      }
+      
        input {
         width: 100%;
       }
