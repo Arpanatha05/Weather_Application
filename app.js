@@ -39,49 +39,7 @@
         container.appendChild(div);
       });
     }
-    function getLocationWeather() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(async (position) => {
-      const lat = position.coords.latitude;
-      const lon = position.coords.longitude;
-      const url = `https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q=${lat},${lon}&aqi=yes`;
-      try {
-        const res = await fetch(url);
-        if (!res.ok) throw new Error("Location not found");
-        const data = await res.json();
-
-        // Same display logic as getWeather()
-        document.getElementById("weatherCard").style.display = "block";
-        document.getElementById("location").innerText = `${data.location.name}, ${data.location.country}`;
-        document.getElementById("icon").src = "https:" + data.current.condition.icon;
-        document.getElementById("temp").innerText = data.current.temp_c;
-        document.getElementById("condition").innerText = data.current.condition.text;
-        document.getElementById("humidity").innerText = data.current.humidity;
-        document.getElementById("wind").innerText = data.current.wind_kph;
-        document.getElementById("aqi").innerText = data.current.air_quality["pm2_5"].toFixed(2) + " PM2.5";
-
-        const historyData = {
-          city: data.location.name,
-          temp: data.current.temp_c,
-          wind: data.current.wind_kph,
-          humidity: data.current.humidity
-        };
-        saveToHistory(historyData);
-      } catch (error) {
-        alert("Error fetching weather data.");
-      }
-    }, () => {
-      alert("Location access denied.");
-    });
-  } else {
-    alert("Geolocation is not supported by this browser.");
-  }
-}
-navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
-  if (result.state === 'denied') {
-    alert('Please enable location access in your browser settings.');
-  }
-});
+    
 
 
     async function getWeather() {
@@ -120,5 +78,47 @@ navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
         alert("Error fetching weather data. Please check the city name.");
       }
     }
+    async function getWeatherByLocation() {
+  if (!navigator.geolocation) {
+    alert("Geolocation is not supported by your browser.");
+    return;
+  }
+
+  navigator.geolocation.getCurrentPosition(async (position) => {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+
+    const url = `https://api.weatherapi.com/v1/current.json?key=16100ec6549d48e287314917252307&q=${lat},${lon}&aqi=yes`;
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("Location weather fetch failed.");
+      const data = await res.json();
+
+      document.getElementById("weatherCard").style.display = "block";
+      document.getElementById("location").innerText = `${data.location.name}, ${data.location.country}`;
+      document.getElementById("icon").src = "https:" + data.current.condition.icon;
+      document.getElementById("temp").innerText = data.current.temp_c;
+      document.getElementById("condition").innerText = data.current.condition.text;
+      document.getElementById("humidity").innerText = data.current.humidity;
+      document.getElementById("wind").innerText = data.current.wind_kph;
+      document.getElementById("aqi").innerText = data.current.air_quality["pm2_5"].toFixed(2) + " PM2.5";
+
+      const historyData = {
+        city: data.location.name,
+        temp: data.current.temp_c,
+        wind: data.current.wind_kph,
+        humidity: data.current.humidity
+      };
+
+      saveToHistory(historyData);
+    } catch (error) {
+      alert("Error fetching weather data for your location.");
+    }
+  }, (error) => {
+    alert("Location access denied. Please allow location access from browser settings.");
+  });
+}
+
 
     window.onload = renderHistory;
