@@ -80,13 +80,17 @@
       text-align: center;
       
     }
-      .gradient-text {
-      font-size: 48px;
-      font-weight: bold;
-      background: linear-gradient(90deg, #ff6a00, #ee0979);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+   
+     .gradient-text {
+  font-size: 48px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #ff6a00, #ee0979);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
 
     .search-box {
       margin-top: 20px;
